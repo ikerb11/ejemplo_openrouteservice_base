@@ -14,6 +14,7 @@ import com.google.android.gms.maps.model.PolylineOptions
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -56,7 +57,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         }
 
-        val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        val mapFragment = supportFragmentManager.findFragmentById(R.id.mimapa) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
     }
@@ -67,6 +68,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         return Retrofit.Builder()
             .baseUrl(urlBase)
             .addConverterFactory(GsonConverterFactory.create())
+            .client(OkHttpClient.Builder().build())
             .build();
     }
     fun createRoute(){
